@@ -2,13 +2,14 @@
 
 #importing stuff
 import yahoo_fin
-from yahoo_fin.stock_info import get_data
-import yahoo_fin.stock_info as si
+#from yahoo_fin.stock_info import get_data
+#import yahoo_fin.stock_info as si
 import pandas as pd
 import yfinance as yf
 import traceback
-import numpy as np
+#import numpy as np
 import os
+import glob
 
 # %%
 pd.set_option('display.max_rows', 10000)
@@ -45,7 +46,6 @@ for stock_key, stock_value in all_stock_dict.items():
 # %%
 amzn = pd.read_csv(r'C:\Users\veron\DA\da_projekt\output\sp500\AMZN_2019-01-02_2020-09-30.csv')
 
-
 def rename(col):
     if col.startswith("Unnamed: "):
         return "date"
@@ -54,4 +54,35 @@ def rename(col):
 
 amzn.columns = [rename(col) for col in amzn.columns]
 amzn.head()
+amzn.info()
 
+# %%
+
+path = r'C:\Users\veron\DA\da_projekt\output\sp500' 
+all_files = glob.glob(path + "/*.csv")
+
+li = []
+
+for filename in all_files:
+    df = pd.read_csv(filename, index_col=None, header=0)
+    li.append(df)
+
+sp500_frame = pd.concat(li, axis=0, ignore_index=True)
+
+# %%
+sp500_frame.head()
+# %%
+len(sp500_frame)
+# %%
+
+def rename(col):
+    if col.startswith("Unnamed: "):
+        return "date"
+    else:
+        return col
+
+frame.columns = [rename(col) for col in frame.columns]
+frame.head()
+# %%
+frame.info()
+# %%
