@@ -2,12 +2,12 @@
 
 ###importing stuff
 import yahoo_fin
-#from yahoo_fin.stock_info import get_data
-#import yahoo_fin.stock_info as si
+from yahoo_fin.stock_info import get_data
+import yahoo_fin.stock_info as si
 import pandas as pd
 import yfinance as yf
 import traceback
-#import numpy as np
+import numpy as np
 import os
 import glob
 
@@ -30,7 +30,7 @@ for stock in sp500_list:
     except Exception as e:
         print (repr(e))
     else:
-        print (akcie_daily)
+        print (stock_daily)
 
 
 print (all_stock_dict)
@@ -62,7 +62,7 @@ amzn.columns = [rename(col) for col in amzn.columns]
 
 # %%
 
-### merging all stocks into one dataframe
+### merging all stock CSVs into one dataframe
 
 path = r'C:\Users\veron\DA\da_projekt\output\sp500' 
 all_files = glob.glob(path + "/*.csv")
@@ -87,8 +87,9 @@ def rename(col):
     else:
         return col
 
-frame.columns = [rename(col) for col in frame.columns]
+sp500_frame.columns = [rename(col) for col in sp500_frame.columns]
 
-#frame.head()
-#frame.info()
+sp500_frame.head()
+#%%
+sp500_frame.info()
 # %%
