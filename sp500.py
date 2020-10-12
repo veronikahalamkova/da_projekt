@@ -1,6 +1,6 @@
 # %%
 
-#importing stuff
+###importing stuff
 import yahoo_fin
 #from yahoo_fin.stock_info import get_data
 #import yahoo_fin.stock_info as si
@@ -19,7 +19,7 @@ len(sp500_list)
 
 # %%
 
-#getting data from Yahoo Finance
+### getting data from Yahoo Finance
 
 all_stock_dict = {}
 #all_stock_dict['sp500']= 'hello world'
@@ -36,6 +36,7 @@ for stock in sp500_list:
 print (all_stock_dict)
 
 # %%
+### exporting to CSVs
 for stock_key, stock_value in all_stock_dict.items():
   date_range = f"{str(stock_value.index[0])[:-9]}_{str(stock_value.index[-1])[:-9]}"
   filename = f"{stock_key}_{date_range}.csv"
@@ -44,6 +45,9 @@ for stock_key, stock_value in all_stock_dict.items():
   stock_value.to_csv(full_filename, index=True)
 
 # %%
+
+### reading one csv at a time
+
 amzn = pd.read_csv(r'C:\Users\veron\DA\da_projekt\output\sp500\AMZN_2019-01-02_2020-09-30.csv')
 
 def rename(col):
@@ -53,10 +57,12 @@ def rename(col):
         return col
 
 amzn.columns = [rename(col) for col in amzn.columns]
-amzn.head()
-amzn.info()
+#amzn.head()
+#amzn.info()
 
 # %%
+
+### merging all stocks into one dataframe
 
 path = r'C:\Users\veron\DA\da_projekt\output\sp500' 
 all_files = glob.glob(path + "/*.csv")
@@ -69,11 +75,11 @@ for filename in all_files:
 
 sp500_frame = pd.concat(li, axis=0, ignore_index=True)
 
+#sp500_frame.head()
+#len(sp500_frame)
 # %%
-sp500_frame.head()
-# %%
-len(sp500_frame)
-# %%
+
+# rename first column in df
 
 def rename(col):
     if col.startswith("Unnamed: "):
@@ -82,7 +88,7 @@ def rename(col):
         return col
 
 frame.columns = [rename(col) for col in frame.columns]
-frame.head()
-# %%
-frame.info()
+
+#frame.head()
+#frame.info()
 # %%
