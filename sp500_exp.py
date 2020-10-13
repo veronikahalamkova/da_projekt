@@ -5,8 +5,11 @@ import numpy as np
 import os
 import glob
 
-df = pd.read_csv('output\sp500_allstock.csv')
+
+sp_500_file = os.path.join("output", "sp500_allstock.csv")
+df = pd.read_csv(sp_500_file)
 
 
 # %%
 df.info()
+# %%
