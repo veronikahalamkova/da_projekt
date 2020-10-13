@@ -74,7 +74,7 @@ for stock_key, stock_value in all_stock_dict.items():
 
 ### reading one csv at a time
 
-amzn = pd.read_csv(r'C:\Users\veron\DA\da_projekt\output\AMZN_2019-01-02_2020-09-30.csv')
+amzn = pd.read_csv(r'output\AMZN_2019-01-02_2020-09-30.csv')
 
 def rename(col):
     if col.startswith("Unnamed: "):
@@ -90,7 +90,7 @@ amzn.columns = [rename(col) for col in amzn.columns]
 
 ### merging all stock CSVs into one dataframe
 
-path = r'C:\Users\veron\DA\da_projekt\output' 
+path = r'output' 
 all_files = glob.glob(path + "/*.csv")
 
 li = []
@@ -101,8 +101,7 @@ for filename in all_files:
 
 stock_frame = pd.concat(li, axis=0, ignore_index=True)
 
-#stock_frame.head()
-#len(stock_frame)
+
 # %%
 
 # rename first column in df
@@ -116,6 +115,10 @@ def rename(col):
 stock_frame.columns = [rename(col) for col in stock_frame.columns]
 
 stock_frame.head()
+
+# %%
+stock_frame.to_csv('output\sp500_allstock.csv', index = False)
 #%%
 stock_frame.info()
 # %%
+
