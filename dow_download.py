@@ -13,7 +13,7 @@ import glob
 
 # %%
 pd.set_option('display.max_rows', 10000)
-stock_list = si.tickers_sp500()
+stock_list = si.tickers_dow()
 #print(stock_list)
 len(stock_list)
 
@@ -34,6 +34,15 @@ for stock in stock_list:
 
 
 print (all_stock_dict)
+
+# %%
+
+for stock in all_stock_dict:
+    print(stock)
+    print(len(all_stock_dict[stock]))
+
+
+
 
 # %%
 
@@ -101,6 +110,24 @@ for filename in all_files:
 
 stock_frame = pd.concat(li, axis=0, ignore_index=True)
 
+
+# %%
+
+len(stock_frame)
+
+# %%
+
+len(stock_frame["ticker"].unique())
+
+stock_frame.groupby(["ticker"]).size()
+
+# %%
+
+#stock_frame[stock_frame.ticker=="AAPL"].date
+
+stock_daily = get_data("AAPL", start_date="01/01/2019", end_date="10/01/2020", index_as_date = False, interval="1d")
+print (len(stock_daily))
+stock_daily.date
 
 # %%
 
