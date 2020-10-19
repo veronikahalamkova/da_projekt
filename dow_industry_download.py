@@ -44,7 +44,7 @@ df_industry.index.name = "ticker"
 
 # merging industry data with the all_stock_dataframe
 
-dow_file = os.path.join("output", "dow_allstock.csv")
+dow_file = os.path.join("output\dow", "dow_allstock.csv")
 df_dow = pd.read_csv(dow_file)
 df_dow=df_dow.merge(df_industry, left_on= "ticker", right_on="ticker")
 print(df_dow)
@@ -53,6 +53,6 @@ print(df_dow)
 
 # saving the extended dataframe (overwriting the original one)
 
-df_dow.to_csv('output\dow_allstock.csv', mode='w', header=True)
+df_dow.to_csv('output\dow\dow_allstock.csv', mode='w', header=True)
 
 # %%
