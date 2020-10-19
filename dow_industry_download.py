@@ -46,13 +46,13 @@ df_industry.index.name = "ticker"
 
 dow_file = os.path.join("output\dow", "dow_allstock.csv")
 df_dow = pd.read_csv(dow_file)
-df_dow=df_dow.merge(df_industry, left_on= "ticker", right_on="ticker")
+df_dow=df_dow.merge(df_industry, how = "left", left_on= "ticker", right_on="ticker")
 print(df_dow)
 
 # %%
 
 # saving the extended dataframe (overwriting the original one)
 
-df_dow.to_csv('output\dow\dow_allstock.csv', mode='w', header=True)
+df_dow.to_csv('output\dow\dow_allstock_all.csv', mode='w', header=True)
 
 # %%
