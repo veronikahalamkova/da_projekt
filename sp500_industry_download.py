@@ -44,7 +44,7 @@ df_industry.index.name = "ticker"
 
 # merging industry data with the all_stock_dataframe
 
-sp500_file = os.path.join("output", "sp500_allstock.csv")
+sp500_file = os.path.join("output\sp500", "sp500_allstock.csv")
 df_sp500 = pd.read_csv(sp500_file)
 df_sp500=df_sp500.merge(df_industry, left_on= "ticker", right_on="ticker")
 print(df_sp500)
@@ -53,6 +53,7 @@ print(df_sp500)
 
 # saving the extended dataframe (overwriting the original one)
 
-df_sp500.to_csv('output\sp500_allstock.csv', mode='w', header=True)
+df_sp500.to_csv('output\sp500\sp500_allstock.csv', mode='w', header=True)
 
 # %%
+df_sp500.info()

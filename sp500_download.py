@@ -37,27 +37,10 @@ print (all_stock_dict)
 
 # %%
 
-### Getting data on stock industry
-industry_all = []
-i = 0
-for akcie in stock_list:
-    try:
-        Firma = yf.Ticker(akcie)
-        industry = Firma.info["sector"]
-    except Exception as e:
-        industry= "N/A"
-    finally: 
-        industry_all.append(industry)
-        i +=1
-print(industry_all)
-print(len(industry_all))
+for stock in all_stock_dict:
+    print(stock)
+    print(len(all_stock_dict[stock]))
 
-# %%
-
-### Getting data on stock industry
-
-for i in range (len(stock_list)):
-    all_stock_dict[i] ["Sector"] = industry_all[i]
 
 # %%
 
@@ -66,7 +49,7 @@ for i in range (len(stock_list)):
 for stock_key, stock_value in all_stock_dict.items():
   date_range = f"{str(stock_value.index[0])[:-9]}_{str(stock_value.index[-1])[:-9]}"
   filename = f"{stock_key}_{date_range}.csv"
-  full_filename = os.path.join ('output', filename)
+  full_filename = os.path.join ('output\sp500', filename)
   print(full_filename)
   stock_value.to_csv(full_filename, index=True)
 
@@ -74,7 +57,7 @@ for stock_key, stock_value in all_stock_dict.items():
 
 ### reading one csv at a time
 
-amzn = pd.read_csv(r'output\AMZN_2019-01-02_2020-09-30.csv')
+amzn = pd.read_csv(r'output\sp500\AMZN_2019-01-02_2020-09-30.csv')
 
 def rename(col):
     if col.startswith("Unnamed: "):
@@ -90,7 +73,7 @@ amzn.columns = [rename(col) for col in amzn.columns]
 
 ### merging all stock CSVs into one dataframe
 
-path = r'output' 
+path = r'output\sp500' 
 all_files = glob.glob(path + "/*.csv")
 
 li = []
@@ -117,7 +100,7 @@ stock_frame.columns = [rename(col) for col in stock_frame.columns]
 stock_frame.head()
 
 # %%
-stock_frame.to_csv('output\sp500_allstock.csv', index = False)
+stock_frame.to_csv('output\sp500\sp500_allstock.csv', index = False)
 #%%
 stock_frame.info()
 # %%
