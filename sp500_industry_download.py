@@ -18,18 +18,20 @@ stock_list = si.tickers_sp500()
 
 ### Getting data on stock industry
 industry_all = {}
-for akcie in stock_list:
+for stock in stock_list:
     try:
-        Firma = yf.Ticker(akcie)
-        industry_all [akcie] = Firma.info
+        company = yf.Ticker(stock)
+        industry_all [stock] = company.info
     except Exception as e:
         industry= "N/A"
 
 # print(industry_all)
 
-#%%
+# %%
 
-print(industry_all)
+for stock in industry_all:
+    print(stock)
+    print(len(industry_all[stock]))
 
 # %%
 
@@ -42,18 +44,5 @@ df_industry.index.name = "ticker"
 
 # %%
 
-# merging industry data with the all_stock_dataframe
-
-sp500_file = os.path.join("output\sp500", "sp500_allstock.csv")
-df_sp500 = pd.read_csv(sp500_file)
-df_sp500=df_sp500.merge(df_industry, left_on= "ticker", right_on="ticker")
-print(df_sp500)
-
+df_industry.to_csv('output\sp500\industries\sp500_industries.csv', index = True)
 # %%
-
-# saving the extended dataframe (overwriting the original one)
-
-df_sp500.to_csv('output\sp500\sp500_allstock.csv', mode='w', header=True)
-
-# %%
-df_sp500.info()
