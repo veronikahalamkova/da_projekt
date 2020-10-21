@@ -13,7 +13,7 @@ import glob
 pd.set_option('display.max_rows', 10000)
 
 # %%
-# defining stock index and importing stocs
+# defining stock index and importing stocks
 
 index_choice = 'dow'
 stock_list = si.tickers_dow()
