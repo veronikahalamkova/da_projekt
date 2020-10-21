@@ -49,7 +49,7 @@ for stock in all_stock_dict:
 for stock_key, stock_value in all_stock_dict.items():
   date_range = f"{str(stock_value.index[0])[:-9]}_{str(stock_value.index[-1])[:-9]}"
   filename = f"{stock_key}_{date_range}.csv"
-  full_filename = os.path.join ('output\dow', filename)
+  full_filename = os.path.join ('output\dow\download', filename)
   print(full_filename)
   stock_value.to_csv(full_filename, index=True)
 
@@ -57,7 +57,7 @@ for stock_key, stock_value in all_stock_dict.items():
 
 ### reading one csv at a time
 
-amzn = pd.read_csv(r'output\AMZN_2019-01-02_2020-09-30.csv')
+amzn = pd.read_csv(r'output\dow\download\AAPL_2019-01-02_2020-09-30.csv')
 
 def rename(col):
     if col.startswith("Unnamed: "):
@@ -73,7 +73,7 @@ amzn.columns = [rename(col) for col in amzn.columns]
 
 ### merging all stock CSVs into one dataframe
 
-path = r'output\dow' 
+path = r'output\dow\download' 
 all_files = glob.glob(path + "/*.csv")
 
 li = []
@@ -118,7 +118,7 @@ stock_frame.columns = [rename(col) for col in stock_frame.columns]
 stock_frame.head()
 
 # %%
-stock_frame.to_csv('output\dow\dow_allstock.csv', index = False)
+stock_frame.to_csv('output\dow\download\dow_allstock.csv', index = False)
 #%%
 stock_frame.info()
 # %%
