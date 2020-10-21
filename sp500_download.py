@@ -35,12 +35,15 @@ for stock in stock_list:
 
 print (all_stock_dict)
 
+<<<<<<< HEAD
+=======
 # %%
 
 for stock in all_stock_dict:
     print(stock)
     print(len(all_stock_dict[stock]))
 
+>>>>>>> 5515e3b7793b942c00a7ac4de452bc631426a1e9
 
 # %%
 
