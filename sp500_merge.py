@@ -18,7 +18,9 @@ df_sp500_final = df_sp500.merge(df_industries, how = "left", left_on= "ticker", 
 # %%
 
 #print(df_sp500_final)
-df_sp500_final.tail()
+#df_sp500_final.tail()
+df_sp500_final.info()
+
 
 # %%
 

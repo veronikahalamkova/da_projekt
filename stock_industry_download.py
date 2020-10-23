@@ -15,8 +15,8 @@ pd.set_option('display.max_rows', 10000)
 # %%
 # defining stock index and importing stocks
 
-index_choice = 'dow'
-stock_list = si.tickers_dow()
+index_choice = 'nasdaq'
+stock_list = si.tickers_nasdaq()
 #print (stock_list)
 
 # %%
@@ -33,7 +33,6 @@ for stock in stock_list:
     else: 
         print(Firma.info)
 
-print(industry_all)
 
 # %%
 

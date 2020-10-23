@@ -16,8 +16,8 @@ pd.set_option('display.max_rows', 10000)
 
 # defining stock index and importing stocks
 
-index_choice = 'dow'
-stock_list = si.tickers_dow()
+index_choice = 'nasdaq'
+stock_list = si.tickers_nasdaq()
 #print (stock_list)
 
 # %%
@@ -47,3 +47,4 @@ for stock_key, stock_value in all_stock_dict.items():
   print(full_filename)
   stock_value.to_csv(full_filename, index=True)
   
+# %%
