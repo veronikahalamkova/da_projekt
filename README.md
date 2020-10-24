@@ -15,13 +15,13 @@ Data jsme transformovali do dataframů podle potřeby a potom mergovali s inform
 V dalším kroku jsme data agregovali podle sektorů a zobrazili je v grafech, jednotlivě i spolu s počty případů Covidu.
 
 ### Porovnání změny cen 5 vybraných akcií, 2019-20 (normalizované)
-![Stocks top 5 normalized](images\stocks_top5.png)
+![Stocks top 5 normalized](images/stocks_top5.png)
 
 ### Vývoj průměrné ceny akcií podle sektoru, 2019-20
-![Stock prices industry](images\stock_prices_industry.png)
+![Stock prices industry](images/stock_prices_industry.png)
 
 ### Vývoj průměrné ceny akcií podle sektoru v souvislosti s případy Covidu v USA, 2020
-![Covid industries](images\covid_industries.png)
+![Covid industries](images/covid_industries.png)
 
 ## Další kroky
 Regresivní analýza vztahu mezi pohybem akcií a vývojem počtu případů Covidu.
