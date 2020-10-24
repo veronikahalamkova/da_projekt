@@ -49,3 +49,5 @@ df_industry.index.name = "ticker"
 
 df_industry.to_csv(f'output\{index_choice}\industries\{index_choice}_industries.csv', index = True)
 
+
+# %%
