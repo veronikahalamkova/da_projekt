@@ -48,3 +48,36 @@ for stock_key, stock_value in all_stock_dict.items():
   stock_value.to_csv(full_filename, index=True)
   
 # %%
+### merging all stock CSVs into one dataframe
+
+path = f'output\{index_choice}\download' 
+all_files = glob.glob(path + "/*.csv")
+
+li = []
+
+for filename in all_files:
+    df = pd.read_csv(filename, index_col=None, header=0)
+    li.append(df)
+
+stock_frame = pd.concat(li, axis=0, ignore_index=True)
+
+
+# %%
+
+# rename first column in df
+
+def rename(col):
+    if col.startswith("Unnamed: "):
+        return "date"
+    else:
+        return col
+
+stock_frame.columns = [rename(col) for col in stock_frame.columns]
+
+stock_frame.head()
+
+# %%
+stock_frame.to_csv('output\sp500\download\sp500_allstock.csv', index = False)
+#%%
+stock_frame.info()
+# %%

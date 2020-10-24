@@ -9,13 +9,13 @@ import os
 
 ### defining stock index
 
-index_choice = 'dow'
+index_choice = 'nasdaq'
 
 # %%
 
 # merging timeseries and industry data into final df
 
-stock_file = os.path.join(f"output\{index_choice}\download", f"{index_choice}_allstock.csv")
+stock_file = os.path.join(f"output\{index_choice}\data_series", f"{index_choice}_allstock.csv")
 df_stock = pd.read_csv(stock_file)
 
 stock_industries_file = os.path.join(f"output\{index_choice}\industries", f"{index_choice}_industries.csv")
