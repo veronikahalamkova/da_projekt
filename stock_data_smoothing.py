@@ -38,6 +38,12 @@ final_df["monthly_rolling_avg_open"]= final_df.groupby("ticker").rolling(window=
 
 # %%
 
+window_size= 7
+final_df["weekly_rolling_avg_open"]= final_df.groupby("ticker").rolling(window=window_size, min_periods= 1)['change_open'].mean().reset_index(drop=True)
+
+
+# %%
+
 ### saving stock price data after smoothing
 
 final_df.to_csv(f'temp\{index_choice}\{index_choice}_final_smoothed.csv', mode='w', header=True, index = False)
