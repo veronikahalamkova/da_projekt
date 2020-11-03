@@ -13,7 +13,7 @@ import datetime
 
 ### choosing the index for data smoothing
 
-index_choice = 'sp500'
+index_choice = 'dow'
 
 # %%
 
@@ -49,4 +49,6 @@ final_df["weekly_rolling_avg_open"]= final_df.groupby("ticker").rolling(window=w
 final_df.to_csv(f'temp\{index_choice}\{index_choice}_final_smoothed.csv', mode='w', header=True, index = False)
 
 
+# %%
+final_df.tail(10)
 # %%
