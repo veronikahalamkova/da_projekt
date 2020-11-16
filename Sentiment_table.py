@@ -4,7 +4,8 @@ from datetime import datetime, date, timedelta
 import os
 import glob
 from difflib import get_close_matches
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer 
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+import numpy as np
 
 # %%
 
@@ -124,26 +125,6 @@ df_news=pd.DataFrame(dict, columns=["name", "date", "text"])
 df_news.head(30)
 
 # %%
-
-#news_company_dict=[]
-
-for article in df_news["text"]:
-    for company in sp500_names["unofficial_name"]:
-        if company in article:
-            print(article)
-        else:
-            pass
-
-#print(news_company_dict)
-
-# %%
-
-#using get_close_matches
-for word in df_news["text"].split():
-    match = get_close_matches(word, company_name, n=1, cutoff=.4)
-    print(match)
-
-# %%
 # Sentiment Analysis
 analyzer = SentimentIntensityAnalyzer()
 
@@ -156,5 +137,40 @@ df_news = df_news.join(df_scores, rsuffix='_right')
 # %%
 
 df_news.head(20)
+
+# %%
+
+#creating a matrix of company vs article
+
+company_columns = sp500_names["ticker"]
+
+for col in company_columns:
+    df_news[col] = 0
+
+# %%
+
+df_news.head(20)
+
+# %%
+all_matches=[]
+
+for news in df_news["text"]:
+    for company in sp500_names["unofficial_name"]:
+        match = get_close_matches(news, company, n=1, cutoff=.4)
+        all_matches.append(match)
+  
+# %%
+
+#news_company_dict=[]
+
+for article in df_news["text"]:
+    for company in sp500_names["unofficial_name"]:
+        if company in article:
+            #print(article)
+        else:
+            pass
+
+#print(news_company_dict)
+
 
 # %%
