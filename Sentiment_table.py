@@ -3,31 +3,31 @@ import pandas as pd
 from datetime import datetime, date, timedelta
 import os
 import glob
+from difflib import get_close_matches
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer 
 
 # %%
 
 ## creating a dataframe with name variations for SP500 stocks
 
-common_endings=["Inc.", "Inc", " Incorporated", "plc"]
-
-
 stock_industries_file = os.path.join("output\sp500\industries", "sp500_industries.csv")
 df_industries = pd.read_csv(stock_industries_file)
 #df_industries.head(20)
-sp500_names=df_industries.loc[:,["ticker", "shortName", "longName"]]
-#sp500_names["unofficial_name"]=sp500_names["shortName"].str.rstrip(", Inc.")
+sp500_names=df_industries.loc[:,["ticker", "longName"]]
+
+# %%
 
 unofficial_name=[]
 
 for name in sp500_names["longName"]:
-    for ending in common_endings:
-        if ending in name:
-            x=name.strip(ending).strip().rstrip(",")
-            unofficial_name.append(x)
-        else:
-            pass
+    x=name.rstrip("Inc.").rstrip("plc").rstrip("Incorporated").rstrip("Corporatio").strip().rstrip(",")
+    unofficial_name.append(x)
 
-print(unofficial_name)
+sp500_names["unofficial_name"]= unofficial_name
+
+#%%
+
+sp500_names.head(20)
 
 # %%
 
@@ -86,7 +86,7 @@ for file_block in all_files:
         name=filename.split("\\")[2].rstrip(".txt")
         names.append(name)
         
-print(names)
+#print(names)
 
 # %%
 
@@ -122,3 +122,39 @@ df_news=pd.DataFrame(dict, columns=["name", "date", "text"])
 # %%
 
 df_news.head(30)
+
+# %%
+
+#news_company_dict=[]
+
+for article in df_news["text"]:
+    for company in sp500_names["unofficial_name"]:
+        if company in article:
+            print(article)
+        else:
+            pass
+
+#print(news_company_dict)
+
+# %%
+
+#using get_close_matches
+for word in df_news["text"].split():
+    match = get_close_matches(word, company_name, n=1, cutoff=.4)
+    print(match)
+
+# %%
+# Sentiment Analysis
+analyzer = SentimentIntensityAnalyzer()
+
+scores = df_news["text"].apply(analyzer.polarity_scores).tolist()
+
+df_scores = pd.DataFrame(scores)
+df_news = df_news.join(df_scores, rsuffix='_right')
+
+
+# %%
+
+df_news.head(20)
+
+# %%
