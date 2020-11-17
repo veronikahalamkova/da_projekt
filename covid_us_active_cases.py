@@ -93,3 +93,8 @@ df_active_cases_us=df_active_cases_us[(df_active_cases_us["datetime"]>=startdate
 # %%
 
 df_active_cases_us.head(20)
+
+# %%
+
+df_active_cases_us.to_csv("", index = True)
+
