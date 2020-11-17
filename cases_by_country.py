@@ -9,6 +9,7 @@ import pyjsparser
 import js2xml
 from datetime import datetime, date, timedelta
 import pandas as pd
+import datetime
 
 
 # %%
@@ -77,12 +78,19 @@ print(dict_active_cases_us)
 
 df_active_cases_us=pd.DataFrame(dict_active_cases_us, columns=["datetime", "active_cases"])
 
+# %%%
+
+df_active_cases_us.head(20)
+
 # %%
 
 ### trimming the date range
 
-startdate = pd.to_datetime("2020-03-01").date()
-enddate = pd.to_datetime("2020-09-30").date()
-df_active_cases_us.loc[startdate:enddate]
+startdate = datetime.datetime.strptime('2020-03-01', "%Y-%m-%d").date()
+enddate = datetime.datetime.strptime('2020-09-30', "%Y-%m-%d").date()
+df_active_cases_us=df_active_cases_us[(df_active_cases_us["datetime"]>=startdate)&(df_active_cases_us["datetime"]<=enddate)].reset_index()
 
+# %%
+
+df_active_cases_us.head(20)
 # %%
