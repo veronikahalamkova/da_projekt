@@ -93,4 +93,3 @@ df_active_cases_us=df_active_cases_us[(df_active_cases_us["datetime"]>=startdate
 # %%
 
 df_active_cases_us.head(20)
-# %%
