@@ -96,5 +96,7 @@ df_active_cases_us.head(20)
 
 # %%
 
-df_active_cases_us.to_csv("", index = True)
+df_active_cases_us.to_csv("covid_us_active_cases_data.csv", index = True)
 
+
+# %%
